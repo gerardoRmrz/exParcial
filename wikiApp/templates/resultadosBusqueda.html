@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    RESULTADOS DE BÚSQUEDA
+{% endblock %}
+
+    {% block contenido %}
+        <ul>
+        {% for articulo in articuloEncontrado %}
+            <li> <a href="{% url 'wikiApp:vistaArticulos' articulo.id %}">{{ articulo.nombreArticulo }}</a> </li>
+        {% endfor %}
+        </ul>
+{% endblock %}

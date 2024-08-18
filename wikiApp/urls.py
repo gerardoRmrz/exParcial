@@ -6,9 +6,9 @@ app_name = 'wikiApp'
 
 urlpatterns = [
     path('', views.principal, name='principal'),
-    path('nuevoTema', views.crearNuevoTema, name='crearNuevoTema' ),
-    path('nuevoArticulo', views.crearNuevoArticulo, name='crearNuevoArticulo'),
-    path('articuloPorTema', views.articuloPorTema, name='articuloPorTema'),
-    path('articulos', views.articulos, name='articulos'),
-    path('busqueda', views.busqueda, name='busqueda')
+    path('nuevoTema', views.nuevoTema, name='nuevoTema' ),
+    path('nuevoArticulo', views.nuevoArticulo, name='nuevoArticulo'),
+    path('articulosPorTema/<str:idTema>', views.articulosPorTema, name='articulosPorTema'),
+    path('vistaArticulos/<str:idArticulo>', views.vistaArticulos, name='vistaArticulos'),
+    path('resultadosBusqueda', views.resultadosBusqueda, name='resultadosBusqueda')
 ]

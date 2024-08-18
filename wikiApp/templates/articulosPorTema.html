@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ objTema.nombreTema }}
+{% endblock %}
+
+{% block contenido %}
+    <ul>
+    {% for articulo in listaArticulos %}
+        <li> <a href="{% url 'wikiApp:vistaArticulos' articulo.id %}">{{ articulo.nombreArticulo }}</a> </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+

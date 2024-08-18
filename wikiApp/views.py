@@ -1,25 +1,71 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .models import Tema, Articulo
 # Create your views here.
+
+
 def principal(request):
-    temasRegistrados = [ f'Tema {x}' for x in range(7) ]
+    temasRegistrados = Tema.objects.all().order_by('id')
     return render(request, 'principal.html', {'temasRegistrados':temasRegistrados})
 
-def crearNuevoTema(request):
-    return HttpResponse("Bienvenido a crear nuevo tema")
+def nuevoTema(request):
+    temasRegistrados = Tema.objects.all().order_by('id')
+    if request.method == 'POST':
+        nombreTema = request.POST.get('nombreTema')
+        descripcionTema = request.POST.get('descripcionTema')
+        objTema = Tema.objects.create(
+            nombreTema = nombreTema,
+            descripcionTema = descripcionTema
+        )
+        objTema.save()
+        return HttpResponseRedirect( reverse('wikiApp:principal') )
+    return render(request, 'nuevoTema.html', {'temasRegistrados':temasRegistrados})
 
-def crearNuevoArticulo(request):
-    return HttpResponse('Bienvenido a crearNuevoArticulo')
+def nuevoArticulo(request):
+    temasRegistrados = Tema.objects.all().order_by('id')
+    if request.method == 'POST':
+        nombreArticulo = request.POST.get('nombreArticulo')
+        temaSeleccionado = request.POST.get('temaSeleccionado')
+        contenidoArticulo = request.POST.get('contenidoArticulo')
+        temaRelacionado = Tema.objects.get(id=temaSeleccionado)
 
-def articuloPorTema(request):
-    return HttpResponse('Bienvenido a articulo por tema')
+        objArticulo = Articulo.objects.create(
+            nombreArticulo = nombreArticulo,
+            contenidoArticulo = contenidoArticulo,
+            temaRelacionado=temaRelacionado
+        )
+        objArticulo.save()
 
-def articulos(request):
-    return HttpResponse('Bienvenido a articulos')
+        return HttpResponseRedirect( reverse('wikiApp:principal') )
+    return render(request, 'nuevoArticulo.html', {'temasRegistrados':temasRegistrados})
 
-def busqueda(request):
-    return HttpResponse('Bienvenido a búsqueda')
+def articulosPorTema(request, idTema):
+    temasRegistrados = Tema.objects.all().order_by('id')
+    objTema = Tema.objects.get(id=idTema)
+    listaArticulos = objTema.articulo_set.all()
+
+    return render(request, 'articulosPorTema.html',{
+        'temasRegistrados': temasRegistrados,
+        'objTema':objTema,
+        'listaArticulos':listaArticulos
+    })
+
+def vistaArticulos(request, idArticulo):
+    temasRegistrados = Tema.objects.all().order_by('id')
+    objArticulo = Articulo.objects.get(id=idArticulo)
+
+    return render(request, 'vistaArticulos.html', {
+        'temasRegistrados':temasRegistrados,
+        'objArticulo':objArticulo})
+
+def resultadosBusqueda(request):
+    temasRegistrados = Tema.objects.all().order_by('id')
+    articuloBuscado = request.POST.get('buscarArticulo')
+    articuloEncontrado = Articulo.objects.filter(nombreArticulo__contains=articuloBuscado)
+    return render(request, 'resultadosBusqueda.html', {
+        'temasRegistrados': temasRegistrados,
+        'articuloEncontrado':articuloEncontrado})
 
 # artículos por tema
 # artículos

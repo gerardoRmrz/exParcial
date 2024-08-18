@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ objArticulo.nombreArticulo }}
+{% endblock %}
+
+{% block contenido %}
+    <div>
+        <div class="h2">
+            {{ objArticulo.nombreArticulo }}
+        </div>
+        <p> {{ objArticulo.contenidoArticulo }} </p>
+    </div>
+{% endblock %}
