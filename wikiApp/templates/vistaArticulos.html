@@ -6,9 +6,16 @@
 
 {% block contenido %}
     <div>
-        <div class="h2">
+        <br>
+        <div class="h3 bg-warning">{{ objArticulo.temaRelacionado.nombreTema }}</div>
+        <br>
+        <div class="h1 col-9">
             {{ objArticulo.nombreArticulo }}
         </div>
-        <p> {{ objArticulo.contenidoArticulo }} </p>
+        <br>
+        <div class="col-7">
+            <p class="lh-sm fs-4"> {{ objArticulo.contenidoArticulo }} </p>
+        </div>
+
     </div>
 {% endblock %}

@@ -5,9 +5,15 @@
 {% endblock %}
 
     {% block contenido %}
+    <br>
+    <div class="h1 bg-warning">RESULTADOS DE BÚSQUEDA</div>
+    <br>
+    <div class="h3">
         <ul>
         {% for articulo in articuloEncontrado %}
             <li> <a href="{% url 'wikiApp:vistaArticulos' articulo.id %}">{{ articulo.nombreArticulo }}</a> </li>
+            <br>
         {% endfor %}
         </ul>
+    </div>
 {% endblock %}

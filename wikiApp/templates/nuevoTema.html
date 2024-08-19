@@ -5,19 +5,25 @@
 {% endblock %}
 
 {% block contenido %}
-    <h2>Crear nuevo tema</h2>
-    <form class="row" method="post" action="{% url 'wikiApp:nuevoTema' %}">
+    <br>
+    <div class="h1 bg-warning">CREAR NUEVO TEMA</div>
+    <br>
+    <div>
+    <form class="fs-4" method="post" action="{% url 'wikiApp:nuevoTema' %}">
         {% csrf_token %}
-        <div>
-            <label>Ingrear título del tema</label>
-            <input type="text" name="nombreTema">
+        <div class="form-group">
+            <label for="nombreTemaInput">Ingrear título del tema</label>
+            <input type="text" class="form-control fs-4" name="nombreTema" id="nombreTemaInput" >
         </div>
-        <div>
-            <label>Ingrese descripción</label>
-            <input type="text" name="descripcionTema">
+        <br>
+        <div class="form-group">
+            <label for="descripcionTemaInput">Ingrese descripción</label>
+            <input type="text" class="form-control fs-4" name="descripcionTema" id="descripcionTemaInput">
         </div>
+        <br>
         <div>
             <input type="submit" value="REGISTRAR">
         </div>
     </form>
+    </div>
 {% endblock %}

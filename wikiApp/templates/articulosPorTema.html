@@ -5,10 +5,16 @@
 {% endblock %}
 
 {% block contenido %}
-    <ul>
-    {% for articulo in listaArticulos %}
-        <li> <a href="{% url 'wikiApp:vistaArticulos' articulo.id %}">{{ articulo.nombreArticulo }}</a> </li>
-    {% endfor %}
-    </ul>
+    <br>
+    <div class="h1 bg-warning"> {{ objTema.nombreTema }} </div>
+    <br>
+    <div class="h3">
+        <ul>
+        {% for articulo in listaArticulos %}
+            <li> <a href="{% url 'wikiApp:vistaArticulos' articulo.id %}">{{ articulo.nombreArticulo }}</a> </li>
+            <br>
+        {% endfor %}
+        </ul>
+    </div>
 {% endblock %}
 

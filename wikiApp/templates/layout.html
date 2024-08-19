@@ -10,43 +10,56 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-        <div class="row">
+        <div class="row px-4">
             <div class="col-3"> <!-- SECCIÓN IZQUIERDA -->
-                <div class="h3"> DIRECTORIO </div>
+                <br>
+                <div class="h3 bg-warning"> DIRECTORIO </div>
                 <br>
                 <!--  barra de búsqueda   -->
+                <div>
                 <form class="row" method="post" action="{% url 'wikiApp:resultadosBusqueda' %}">
                     {% csrf_token %}
-                <div class="input-group">
-                    <div class="form-outline" data-mdb-input-init>
-                        <input type="search" id="form1" class="form-control" name="buscarArticulo" required/>
-                        <label class="form-label" for="form1">Buscar</label>
+                    <div class="input-group">
+                        <div class="form-outline" data-mdb-input-init>
+                            <input type="search" id="form1" class="form-control fs-4" name="buscarArticulo" required/>
+                            <label class="form-label fs-4" for="form1">Buscar</label>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary fs-4" data-mdb-ripple-init>
+                            <i class="fas fa-search"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                    <button type="submit" class="btn btn-primary" data-mdb-ripple-init>
-                        <i class="fas fa-search"></i>
-                    </button>
-                    </div>
-                </div>
                 </form>
+                </div>
                 <!--  barra de búsqueda   -->
+                <br>
+                <!-- botón de inicio -->
+                    <div class="col-5">
+                        <button type="button" class="btn btn-primary"><a class="link-light fs-5" href="{% url 'wikiApp:principal' %}">Inicio</a></button>
+                    </div>
+                <!-- botón de inicio -->
                 <br>
                 <!--  lista de artículos   -->
                 <div>
-                    <div class="h4">TEMAS DISPONIBLES</div>
+                    <div class="h3 bg-warning">TEMAS DISPONIBLES</div>
                     <ul>
                         {% for tema in temasRegistrados %}
-                            <li><a href="{% url 'wikiApp:articulosPorTema' tema.id %}">{{ tema.nombreTema }}</a></li>
+                            <li><a class="fs-4" href="{% url 'wikiApp:articulosPorTema' tema.id %}">{{ tema.nombreTema }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
                 <!--  botones de creación  -->
-                <div class="col-12">
-                    <button type="button" class="btn btn-warning"><a href="{% url 'wikiApp:nuevoTema' %}">Crear nuevo tema</a></button>
-                    <button type="button" class="btn btn-warning"><a href="{% url 'wikiApp:nuevoArticulo' %}">Crear nuevo artículo</a></button>
+                <div class="row justify-content-around">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary"><a class="link-light fs-5" href="{% url 'wikiApp:nuevoTema' %}">Crear nuevo tema</a></button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary"><a class="link-light fs-5" href="{% url 'wikiApp:nuevoArticulo' %}">Crear nuevo artículo</a></button>
+                    </div>
                 </div>
             </div>
-            <div class="col-8"> <!-- SECCIÓN DERECHA -->
+            <div class="px-4 col-8"> <!-- SECCIÓN DERECHA -->
                 {% block contenido %}
                 {% endblock %}
             </div>
